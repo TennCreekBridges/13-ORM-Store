@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// find one category by its `id` value
+// find one category by its `id` value and include Product data
 router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
