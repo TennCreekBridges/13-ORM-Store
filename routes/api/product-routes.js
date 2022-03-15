@@ -28,6 +28,9 @@ router.get('/', (req, res) => {
 // get one product by id & include associate Category & Tag data
 router.get('/:id', (req, res) => {
   Product.findOne({
+    where: {
+      id: req.params.id,
+    },
     attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
     include: [
       {
@@ -40,10 +43,9 @@ router.get('/:id', (req, res) => {
       },
     ],
   })
-
     .then((dbProductData) => {
       if (!dbProductData) {
-        res.status(404).json({ message: 'No product found with this id.' });
+        res.status(404).json({ message: 'No product found with this id' });
         return;
       }
       res.json(dbProductData);
